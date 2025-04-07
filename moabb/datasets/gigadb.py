@@ -8,8 +8,8 @@ from mne.channels import make_standard_montage
 from mne.io import RawArray
 from scipy.io import loadmat
 
-from . import download as dl
-from .base import BaseDataset
+from moabb.datasets import download as dl
+from moabb.datasets.base import BaseDataset, CacheConfig
 
 
 log = logging.getLogger(__name__)
@@ -123,3 +123,8 @@ class Cho2017(BaseDataset):
 
         url = "{:s}s{:02d}.mat".format(GIGA_URL, subject)
         return dl.data_dl(url, "GIGADB", path, force_update, verbose)
+
+if __name__ == "__main__":
+    # Example usage
+    dataset = Cho2017()
+    dataset.download(path='/data2/eeg_datasets')
